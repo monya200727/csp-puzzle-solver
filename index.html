@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CSP Solver: N-Queens, Sudoku, Graph Coloring</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css"></head><body><div class="wrap">
+<h1>Constraint Satisfaction Solver</h1>
+<p class="sub">Backtracking search with forward checking and MRV ordering. One generic solver runs N-Queens (N up to 20), Sudoku and graph coloring. Watch the search tree grow and see how many branches pruning removes.</p>
+<div class="bar">
+ <label>Problem<select id="prob"><option value="q">N-Queens</option><option value="s">Sudoku</option><option value="g">Graph coloring</option></select></label>
+ <label id="nlw"><span id="nl">Board size N</span><input id="n" type="number" min="4" max="20" value="8"></label>
+ <label id="exw">Instance<select id="ex"></select></label>
+ <label>Algorithm<select id="alg"><option value="bt">Plain backtracking</option><option value="fc">Backtracking + forward checking</option><option value="fcmrv">Forward checking + MRV</option></select></label>
+ <label class="chk" id="allw"><input type="checkbox" id="all"> Find all solutions</label>
+ <label>Speed<input type="range" id="spd" min="1" max="100" value="45"></label>
+ <button class="p" id="go">Start</button><button id="stp">Step</button><button id="inst">Run to end</button><button id="rst">Reset</button>
+</div>
+<div class="main">
+ <div class="card left"><canvas id="board" width="520" height="520"></canvas><p id="msg"></p></div>
+ <div class="right">
+  <div class="card">
+   <div class="stats" id="stats"></div>
+   <div class="split" id="split"></div>
+   <p class="note" id="space"></p>
+   <div class="leg"><span><i style="background:var(--ok)"></i>nodes explored</span><span><i style="background:var(--bad)"></i>values pruned</span></div>
+  </div>
+  <div class="card" style="margin-top:16px">
+   <h2>Compare algorithms on this instance</h2>
+   <button id="cmp">Run comparison</button>
+   <table id="ct" style="margin-top:10px"></table>
+   <p class="note">Each run stops at the first solution (or after all solutions if checked). Runs are capped at 3 million steps.</p>
+  </div>
+ </div>
+</div>
+<div class="card tw" style="margin-top:16px">
+ <h2>Search tree</h2>
+ <canvas id="tree" width="1000" height="280"></canvas>
+ <div class="leg"><span><i style="background:var(--ok)"></i>consistent placement</span><span><i style="background:var(--bad)"></i>dead end (pruned)</span><span><i style="background:var(--acc)"></i>solution</span><span>Depth runs left to right, siblings top to bottom. Shows the first 4000 nodes.</span></div>
+</div>
+</div>
+<script src="js/utils.js"></script>
+<script src="js/problems.js"></script>
+<script src="js/solver.js"></script>
+<script src="js/render.js"></script>
+<script src="js/app.js"></script></body></html>
